@@ -70,6 +70,40 @@ const changeBiography = async (biography, token) => {
   }
 }
 
+const changeColor = async (color, token) => {
+  if (!color || typeof color !== 'number') {
+    throw new Error('No color given');
+  }
+  if (!token || typeof token !== 'string' || token.trim() === '') {
+    throw new Error('No token given');
+  }
+
+  try {
+    const request = await axios.post(`${baseUrl}/user/change-color/`, {
+      themeColor: color
+    }, {
+      headers: { Authorization: `Token ${token}` }
+    });
+    return request.status === 200;
+  } catch (e) {
+    throw new Error(`Failed to update user color: ${e.message}`);
+  }
+}
+
+const getFeatured = async (username) => {
+  if (!username || typeof username !== 'string' || username.trim() === '') {
+    throw new Error('No username given');
+  }
+
+  try {
+    const request = await axios.post(`${baseUrl}/user/featured/${username}`);
+    return request.data;
+  } catch (e) {
+    throw new Error(`Failed to fetch ${username}'s featured list: ${e.message}`);
+  }
+}
+
 module.exports = {
-  basicInformation, completeInformation, changeAvatar, changeBiography
+  basicInformation, completeInformation, changeAvatar, changeBiography, changeColor,
+  getFeatured
 };

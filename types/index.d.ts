@@ -11,6 +11,8 @@ declare interface UserAPI {
   }>,
   changeAvatar: (url: string, token: string) => Promise<boolean>,
   changeBiography: (biography: string, token: string) => Promise<boolean>,
+  changeColor: (color: number, token: string) => Promise<boolean>,
+  getFeatured: (username: string) => Promise<[]>,
 }
 
 export interface User {
