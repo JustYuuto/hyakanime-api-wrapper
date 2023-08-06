@@ -28,3 +28,7 @@ const completeInformation = async (token) => {
     throw new Error(`Failed to fetch user complete information: ${e.message}`);
   }
 }
+
+module.exports = {
+  basicInformation, completeInformation
+};
