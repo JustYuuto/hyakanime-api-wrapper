@@ -1,5 +1,6 @@
 declare interface API {
-  user: UserAPI
+  user: UserAPI,
+  progress: ProgressAPI
 }
 
 declare interface UserAPI {
@@ -13,6 +14,10 @@ declare interface UserAPI {
   changeBiography: (biography: string, token: string) => Promise<boolean>,
   changeColor: (color: number, token: string) => Promise<boolean>,
   getFeatured: (username: string) => Promise<[]>,
+}
+
+declare interface ProgressAPI {
+  get: (username: string) => Promise<[]>
 }
 
 export interface User {
