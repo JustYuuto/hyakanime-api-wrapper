@@ -3,8 +3,12 @@
   "description": "A Node.js wrapper for Hyakanime API",
   "version": "1.0.0",
   "main": "src/index.js",
+  "types": "types/index.d.ts",
   "license": "MIT",
   "dependencies": {
     "axios": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.8"
   }
 }
