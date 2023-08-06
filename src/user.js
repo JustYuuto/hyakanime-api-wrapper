@@ -32,7 +32,7 @@ const completeInformation = async (token) => {
 
 const changeAvatar = async (url, token) => {
   if (!url || typeof url !== 'string' || url.trim() === '' || !isURL(url)) {
-    throw new Error('No readable given');
+    throw new Error('No URL given');
   }
   if (!token || typeof token !== 'string' || token.trim() === '') {
     throw new Error('No token given');
