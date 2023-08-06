@@ -9,7 +9,8 @@ declare interface UserAPI {
     biographie: string,
     NotificationToken: string
   }>,
-  changeAvatar: (url: string, token: string) => void
+  changeAvatar: (url: string, token: string) => Promise<boolean>,
+  changeBiography: (biography: string, token: string) => Promise<boolean>,
 }
 
 export interface User {

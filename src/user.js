@@ -39,17 +39,37 @@ const changeAvatar = async (url, token) => {
   }
 
   try {
-    const request = await axios.post(`${baseUrl}/user/change-avatar`, {
+    const request = await axios.post(`${baseUrl}/user/change-avatar/`, {
       photoURL: url
     }, {
       headers: { Authorization: `Token ${token}` }
     });
-    return request.data;
+    return request.status === 200;
   } catch (e) {
     throw new Error(`Failed to update user avatar: ${e.message}`);
   }
 }
 
+const changeBiography = async (biography, token) => {
+  if (!biography || typeof biography !== 'string' || biography.trim() === '') {
+    throw new Error('No biography given');
+  }
+  if (!token || typeof token !== 'string' || token.trim() === '') {
+    throw new Error('No token given');
+  }
+
+  try {
+    const request = await axios.post(`${baseUrl}/user/change-biographie/`, {
+      biographie: biography
+    }, {
+      headers: { Authorization: `Token ${token}` }
+    });
+    return request.status === 200;
+  } catch (e) {
+    throw new Error(`Failed to update user biography: ${e.message}`);
+  }
+}
+
 module.exports = {
-  basicInformation, completeInformation, changeAvatar
+  basicInformation, completeInformation, changeAvatar, changeBiography
 };
