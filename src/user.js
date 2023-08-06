@@ -1,5 +1,6 @@
 const axios = require('axios');
 const { baseUrl } = require('./variables');
+const isURL = require('is-url');
 
 const basicInformation = async (username) => {
   if (!username || typeof username !== 'string' || username.trim() === '') {
@@ -29,6 +30,26 @@ const completeInformation = async (token) => {
   }
 }
 
+const changeAvatar = async (url, token) => {
+  if (!url || typeof url !== 'string' || url.trim() === '' || !isURL(url)) {
+    throw new Error('No readable given');
+  }
+  if (!token || typeof token !== 'string' || token.trim() === '') {
+    throw new Error('No token given');
+  }
+
+  try {
+    const request = await axios.post(`${baseUrl}/user/change-avatar`, {
+      photoURL: url
+    }, {
+      headers: { Authorization: `Token ${token}` }
+    });
+    return request.data;
+  } catch (e) {
+    throw new Error(`Failed to update user avatar: ${e.message}`);
+  }
+}
+
 module.exports = {
-  basicInformation, completeInformation
+  basicInformation, completeInformation, changeAvatar
 };

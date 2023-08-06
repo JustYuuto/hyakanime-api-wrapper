@@ -9,6 +9,7 @@ declare interface UserAPI {
     biographie: string,
     NotificationToken: string
   }>,
+  changeAvatar: (url: string, token: string) => void
 }
 
 export interface User {
