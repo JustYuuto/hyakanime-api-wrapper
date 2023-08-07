@@ -96,7 +96,7 @@ const getFeatured = async (username) => {
   }
 
   try {
-    const request = await axios.post(`${baseUrl}/user/featured/${username}`);
+    const request = await axios.get(`${baseUrl}/user/featured/${username}`);
     return request.data;
   } catch (e) {
     throw new Error(`Failed to fetch ${username}'s featured list: ${e.message}`);
