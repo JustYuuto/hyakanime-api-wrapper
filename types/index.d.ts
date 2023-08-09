@@ -18,7 +18,8 @@ declare interface UserAPI {
 }
 
 declare interface ProgressAPI {
-  get: (username: string) => Promise<ProgressItem[]>
+  get: (username: string) => Promise<ProgressItem[]>,
+  write: (id: number, progress: number, status: ProgressStatus, token: string) => Promise<boolean>
 }
 
 declare type SearchAPI = (query: string, type?: QueryType) => []
@@ -43,6 +44,14 @@ declare interface ProgressItem {
   type: 'Anime',
   studios: number,
   genre: AnimeGenre[]
+}
+
+export enum ProgressStatus {
+  'IN_PROGRESS' = 1,
+  'TO_WATCH',
+  'DONE',
+  'PAUSED',
+  'ABANDONED'
 }
 
 // pourquoi j'ai passé autant de temps sur ce truc

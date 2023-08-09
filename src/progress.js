@@ -14,6 +14,24 @@ const get = async (username) => {
   }
 }
 
+const write = async (id, progress, status, token) => {
+  if (isNaN(id)) throw new Error('No anime id given');
+  if (isNaN(progress)) throw new Error('No anime id given');
+  if (isNaN(status)) throw new Error('No anime id given');
+  else if (status < 1 || status > 5) throw new Error('"status" needs to be a number between 1 and 5');
+
+  try {
+    const request = await axios.post(`${baseUrl}/progress/write/`, {
+      id, progression: progress, status
+    }, {
+      headers: { Authorization: token }
+    });
+    return request.status === 200;
+  } catch (e) {
+    throw new Error(`Failed to write progress: ${e.message}`);
+  }
+}
+
 module.exports = {
-  get
+  get, write
 };
