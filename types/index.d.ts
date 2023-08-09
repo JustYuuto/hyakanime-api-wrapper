@@ -1,6 +1,7 @@
 declare interface API {
   user: UserAPI,
-  progress: ProgressAPI
+  progress: ProgressAPI,
+  search: SearchAPI
 }
 
 declare interface UserAPI {
@@ -19,6 +20,10 @@ declare interface UserAPI {
 declare interface ProgressAPI {
   get: (username: string) => Promise<ProgressItem[]>
 }
+
+declare type SearchAPI = (query: string, type?: QueryType) => []
+
+declare type QueryType = 'anime' | 'user';
 
 export interface User {
   photoURL: string,
